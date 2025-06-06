@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript View</title>
+
+  <script type="text/javascript">
+
+    window.onload = function(){
+      printerInternalImpStart();
+    }
+
+    function printerInternalImpStart(){
+        var lengthLong = true;
+        var message = "Conectando Impressora Interna";
+
+        androidApp.makeToast(message, lengthLong);
+
+        androidApp.printerInternalImpStart();
+    }
+
+    function imprimeTexto() {
+        var lengthLong = true;
+        var message = "Conectando Impressora Interna";
+
+        androidApp.makeToast("Imprimindo Texto", lengthLong);
+
+        var inputText = document.getElementById("textoImpressora").value
+
+        var params = { text: "EMPRESA TESTE \n LEANDRO \n",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 17,
+                       isUnderline: false,
+                       isBold: true}
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+		var params = { text: "EMPRESA TESTE LEANDRO",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 17,
+                       isUnderline: false,
+                       isBold: false }
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+		var params = { text: "______________________________________________\n",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: false}
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+		var params = { text: "CAIXA CONVENCIONAL",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: true}
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+		var params = { text: "08:00 ÀS 18:00",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: false }
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+				
+		var params = { text: "00001",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 17,
+                       isUnderline: false,
+                       isBold: true }
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+		
+				var params = { text: "Segunda-feira, 31/07/2023",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: true}
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+				var params = { text: "12:52",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: true}
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+						var params = { text: "* a previsao de antendimento pode ser alterada",
+                       align: "Centralizado",
+                       font: "FONT B",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: true}
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+				var params = { text: "______________________________________________\n",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: false}
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+		var params = { qrSize: 4,
+                       text: "CentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizadoCentralizado",
+                       align: "Centralizado" }
+        androidApp.imprimeQR(JSON.stringify(params));
+		
+		
+						var params = { text: "SMART CODE: SC-M38CX",
+                       align: "Centralizado",
+                       font: "FONT A",
+                       fontSize: 0,
+                       isUnderline: false,
+                       isBold: false }
+        androidApp.imprimeTexto(JSON.stringify(params));
+		
+		
+		var params = {   quant: 10 }
+		androidApp.cutPaper(JSON.stringify(params));
+		
+    }
+	
+		    function modoKioskOff() {
+        androidApp.modoKioskOff();
+    }
+		function modoKioskOn() {
+        androidApp.modoKioskOn();
+    }
+
+  </script>
+</head>
+
+<body>
+  <h1>Exemplo WebView</h1>
+  <input id="textoImpressora" type="text" value="Hello World!" placeholder="Digite seu texto" />
+  <button id="btnImprimirTexto" onclick="imprimeTexto()" type="button">
+    Imprimir
+  </button>
+    <button id="btnImprimirTexto" onclick="modoKioskOff()" type="button">
+    modoKioskOff()
+  </button>
+    <button id="btnImprimirTexto" onclick="imprimeTexto()" type="button">
+    modoKioskOn()
+  </button>
+</body>
+</html>
