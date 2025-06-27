@@ -135,6 +135,29 @@
         androidApp.modoKioskOn();
     }
 
+    const printTicket = async () => {
+    const ticket = {
+      unit: 'Unidade Central',
+      unitService: 'Caixa',
+      description: 'Serviço de Pagamento de Contas, Saques e Depósitos',
+      display_number: 'CX0020',
+      customerName: 'João da Silva',
+      customerIdentifier: '+55 11 99988-7766',
+      attendant: 'Silvia Silva',
+      local: 'Mesa 04',
+      footer: '21/08/2023 • 14:58:20 • Octogenário 80+ ',
+      logo: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
+    };
+
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({
+        type: 'ticket',
+        payload: ticket,
+      }),
+    );
+  };
+ 
+
   </script>
 </head>
 
@@ -149,6 +172,10 @@
   </button>
     <button id="btnImprimirTexto" onclick="imprimeTexto()" type="button">
     modoKioskOn()
+  </button>
+  </button>
+    <button id="btnImprimirGAF" onclick="printTicket()" type="button">
+	ImprimirGAF
   </button>
 </body>
 </html>
