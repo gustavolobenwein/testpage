@@ -5,8 +5,32 @@
 
   <script type="text/javascript">
 
+    // variável global para armazenar o Base64
+    let logoBase64 = null;
+	  
     window.onload = function(){
       printerInternalImpStart();
+      preloadLogo();   // carrega o logo uma única vez
+    }
+	    
+    function preloadLogo() {
+      fetch('teste-logo-GAF.jpg')
+        .then(res => {
+          if (!res.ok) throw new Error('Não encontrou o logo');
+          return res.blob();
+        })
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            logoBase64 = reader.result;   // data:image/jpeg;base64,...
+            console.log('Logo pré-carregado');
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch(err => {
+          console.error('Erro ao pré-carregar logo:', err);
+          androidApp.makeToast('Falha ao pré-carregar logo', true);
+        });
     }
 
     function printerInternalImpStart(){
@@ -18,6 +42,14 @@
         androidApp.printerInternalImpStart();
     }
 
+    function imprimeLogo() {
+      if (!logoBase64) {
+        androidApp.makeToast('Logo ainda não carregado', true);
+        return;
+      }
+      androidApp.imprimeImagem(logoBase64);
+    }
+
     function imprimeTexto() {
         var lengthLong = true;
         var message = "Conectando Impressora Interna";
@@ -26,6 +58,8 @@
 
         var inputText = document.getElementById("textoImpressora").value
 
+	imprimeLogo();
+	    
         var params = { text: "EMPRESA TESTE \n LEANDRO \n",
                        align: "Centralizado",
                        font: "FONT A",
