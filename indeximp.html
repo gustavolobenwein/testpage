@@ -33,6 +33,47 @@
         });
     }
 
+   function imprimeticket1() {
+      fetch('ticket1.jpg')
+        .then(res => {
+          if (!res.ok) throw new Error('Não encontrou o ticket1');
+          return res.blob();
+        })
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            logoBase64 = reader.result;   // data:image/jpeg;base64,...
+	    androidApp.imprimeImagem(reader.result);
+            console.log('ticket1 pré-carregado');
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch(err => {
+          console.error('Erro ao pré-carregar ticket1:', err);
+          androidApp.makeToast('Falha ao pré-carregar ticket1', true);
+        });
+    }
+
+    function imprimeticket2() {
+      fetch('ticket2.jpg')
+        .then(res => {
+          if (!res.ok) throw new Error('Não encontrou o ticket2');
+          return res.blob();
+        })
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            androidApp.imprimeImagem(reader.result);		  
+            console.log('Ticket2 pré-carregado');
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch(err => {
+          console.error('Erro ao pré-carregar ticket2:', err);
+          androidApp.makeToast('Falha ao pré-carregar ticket2', true);
+        });
+    }
+
     function printerInternalImpStart(){
         var lengthLong = true;
         var message = "Conectando Impressora Interna";
@@ -210,6 +251,14 @@
   </button>
     <button id="btnImprimirGAF" onclick="printTicket()" type="button">
 	ImprimirGAF
+  </button>
+	</button>
+    <button id="btnImprimirGAF" onclick="imprimeticket1()" type="button">
+	Ticket1
+  </button>
+  </button>
+  <button id="btnImprimirGAF" onclick="imprimeticket2()" type="button">
+	Ticket2
   </button>
 </body>
 </html>
