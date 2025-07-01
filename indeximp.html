@@ -74,6 +74,26 @@
         });
     }
 
+    function imprimeticket3() {
+      fetch('ticket3.jpg')
+        .then(res => {
+          if (!res.ok) throw new Error('Não encontrou o ticket3');
+          return res.blob();
+        })
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            androidApp.imprimeImagem(reader.result);		  
+            console.log('Ticket3 pré-carregado');
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch(err => {
+          console.error('Erro ao pré-carregar ticket3:', err);
+          androidApp.makeToast('Falha ao pré-carregar ticket3', true);
+        });
+    }
+	  
     function printerInternalImpStart(){
         var lengthLong = true;
         var message = "Conectando Impressora Interna";
@@ -260,5 +280,8 @@
   <button id="btnImprimirGAF" onclick="imprimeticket2()" type="button">
 	Ticket2
   </button>
+  <button id="btnImprimirGAF" onclick="imprimeticket3()" type="button">
+	Ticket3
+  </button>	
 </body>
 </html>
